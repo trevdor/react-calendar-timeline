@@ -321,6 +321,9 @@ function (action, item, time, resizeEdge) {
 }
 ```
 
+## onDragUpdate(itemId, time, newGroup, action, resizeEdge) 
+	
+	this function is called after moveResizeValidator on every drag update
 
 ## onTimeChange(visibleTimeStart, visibleTimeEnd, updateScrollCanvas)
 
