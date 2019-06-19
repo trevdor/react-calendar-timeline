@@ -16,38 +16,22 @@ const passThroughPropTypes = {
   verticalLineClassNamesForTime: PropTypes.func
 }
 
-class Columns extends Component {
+class Columns extends PureComponent {
   static propTypes = {
     ...passThroughPropTypes,
     getLeftOffsetFromDate: PropTypes.func.isRequired
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return !(
-      nextProps.canvasTimeStart === this.props.canvasTimeStart &&
-      nextProps.canvasTimeEnd === this.props.canvasTimeEnd &&
-      nextProps.canvasWidth === this.props.canvasWidth &&
-      nextProps.lineCount === this.props.lineCount &&
-      nextProps.minUnit === this.props.minUnit &&
-      nextProps.timeSteps === this.props.timeSteps &&
-      nextProps.height === this.props.height &&
-      nextProps.verticalLineClassNamesForTime ===
-        this.props.verticalLineClassNamesForTime
-    )
   }
 
   render() {
     const {
       canvasTimeStart,
       canvasTimeEnd,
-      canvasWidth,
       minUnit,
       timeSteps,
       height,
       verticalLineClassNamesForTime,
       getLeftOffsetFromDate
     } = this.props
-    const ratio = canvasWidth / (canvasTimeEnd - canvasTimeStart)
 
     let lines = []
 
