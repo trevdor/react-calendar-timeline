@@ -26,14 +26,12 @@ class Columns extends PureComponent {
     const {
       canvasTimeStart,
       canvasTimeEnd,
-      canvasWidth,
       minUnit,
       timeSteps,
       height,
       verticalLineClassNamesForTime,
       getLeftOffsetFromDate
     } = this.props
-    const ratio = canvasWidth / (canvasTimeEnd - canvasTimeStart)
 
     let lines = []
 
