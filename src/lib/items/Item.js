@@ -2,6 +2,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import interact from 'interactjs'
 import moment from 'moment'
+import classNames from 'classnames'
 
 import { _get, deepObjectCompare } from '../utility/generic'
 import { composeEvents } from '../utility/events'
@@ -523,15 +524,17 @@ export default class Item extends Component {
 
   getItemProps = (props = {}) => {
     //TODO: maybe shouldnt include all of these classes
-    const classNames =
-      'rct-item' +
-      (this.props.item.className ? ` ${this.props.item.className}` : '')
+    const itemClassNames = classNames(
+      'rct-item',
+      this.props.item.className,
+      props.className
+    )
 
     return {
       key: this.itemId,
       ref: this.getItemRef,
       title: this.itemDivTitle,
-      className: classNames + ` ${props.className ? props.className : ''}`,
+      className: itemClassNames,
       onMouseDown: composeEvents(this.onMouseDown, props.onMouseDown),
       onMouseUp: composeEvents(this.onMouseUp, props.onMouseUp),
       onTouchStart: composeEvents(this.onTouchStart, props.onTouchStart),
