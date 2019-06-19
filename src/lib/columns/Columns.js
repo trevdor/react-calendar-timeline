@@ -43,12 +43,14 @@ class Columns extends PureComponent {
       (time, nextTime) => {
         const minUnitValue = time.get(minUnit === 'day' ? 'date' : minUnit)
         const firstOfType = minUnitValue === (minUnit === 'day' ? 1 : 0)
+        const timeMillis = time.valueOf();
+        const nextTimeMillis = nextTime.valueOf();
 
         let classNamesForTime = []
         if (verticalLineClassNamesForTime) {
           classNamesForTime = verticalLineClassNamesForTime(
-            time.unix() * 1000, // turn into ms, which is what verticalLineClassNamesForTime expects
-            nextTime.unix() * 1000 - 1
+            timeMillis,
+            nextTimeMillis - 1
           )
         }
 
@@ -63,11 +65,11 @@ class Columns extends PureComponent {
           ...classNamesForTime
         )
 
-        const left = getLeftOffsetFromDate(time.valueOf())
-        const right = getLeftOffsetFromDate(nextTime.valueOf())
+        const left = getLeftOffsetFromDate(timeMillis)
+        const right = getLeftOffsetFromDate(nextTimeMillis)
         lines.push(
           <div
-            key={`line-${time.valueOf()}`}
+            key={`line-${timeMillis}`}
             className={lineClassNames}
             style={{
               pointerEvents: 'none',
