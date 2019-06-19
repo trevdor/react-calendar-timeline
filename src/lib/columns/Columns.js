@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import classNames from 'classnames';
 
 import { iterateTimes } from '../utility/calendar'
 import { TimelineStateConsumer } from '../timeline/TimelineStateContext'
@@ -68,20 +69,22 @@ class Columns extends Component {
         }
 
         // TODO: rename or remove class that has reference to vertical-line
-        const classNames =
-          'rct-vl' +
-          (firstOfType ? ' rct-vl-first' : '') +
-          (minUnit === 'day' || minUnit === 'hour' || minUnit === 'minute'
-            ? ` rct-day-${time.day()} `
-            : '') +
-          classNamesForTime.join(' ')
+        const lineClassNames = classNames(
+          'rct-vl',
+          {
+            'rct-vl-first': firstOfType,
+            [`rct-day-${time.day()}`]:
+              minUnit === 'day' || minUnit === 'hour' || minUnit === 'minute'
+          },
+          ...classNamesForTime
+        )
 
         const left = getLeftOffsetFromDate(time.valueOf())
         const right = getLeftOffsetFromDate(nextTime.valueOf())
         lines.push(
           <div
             key={`line-${time.valueOf()}`}
-            className={classNames}
+            className={lineClassNames}
             style={{
               pointerEvents: 'none',
               top: '0px',

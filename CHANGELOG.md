@@ -10,6 +10,7 @@ and this project adheres (more or less) to [Semantic Versioning](http://semver.o
 ## 0.25.4
 
 - Move `classnames` to a production dependency, not dev
+- Refactor to use classnames helper in Columns and Item components
 
 ## 0.25.3
 
