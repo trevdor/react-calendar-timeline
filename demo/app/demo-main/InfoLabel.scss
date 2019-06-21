@@ -1,0 +1,12 @@
+.rct-infolabel {
+  position: fixed;
+  left: 100px;
+  bottom: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  
+  font-size: 20px;
+  border-radius: 5px;
+  z-index: 85;
+}
