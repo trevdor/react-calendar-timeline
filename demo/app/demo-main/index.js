@@ -12,8 +12,10 @@ import Timeline, {
   SidebarHeader,
   DateHeader
 } from 'react-calendar-timeline'
+import InfoLabel from './InfoLabel'
 
 import generateFakeData from '../generate-fake-data'
+import { movements } from '../../../src/lib/constants';
 
 var minTime = moment()
   .add(-6, 'months')
@@ -97,7 +99,8 @@ export default class App extends Component {
               group: group.id
             })
           : item
-      )
+      ),
+      isDragging: false
     })
 
     console.log('Moved', itemId, dragTime, newGroupOrder)
@@ -114,7 +117,8 @@ export default class App extends Component {
               end: edge === 'left' ? item.end : time
             })
           : item
-      )
+      ),
+      isDragging: false
     })
 
     console.log('Resized', itemId, time, edge)
@@ -143,8 +147,10 @@ export default class App extends Component {
     return time
   }
 
-  handleDragUpdate = (...args) => {
-    console.log(args)
+  handleDragUpdate = (item, dragTime, newGroupOrder, movement) => {
+    this.setState({dragTime, movement})
+
+    console.log('handleDragUpdate', (item, newTime, newGroupOrder, movement));
   }
 
   render() {
@@ -179,6 +185,7 @@ export default class App extends Component {
         moveResizeValidator={this.moveResizeValidator}
         onDragUpdate={this.handleDragUpdate}
       >
+        <InfoLabel time={this.state.dragTime} />
         <TimelineMarkers>
           <TodayMarker />
           <CustomMarker

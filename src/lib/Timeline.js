@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import moment from 'moment'
 
 import Items from './items/Items'
-import InfoLabel from './layout/InfoLabel'
 import Sidebar from './layout/Sidebar'
 import Columns from './columns/Columns'
 import GroupRows from './row/GroupRows'
@@ -824,18 +823,18 @@ export default class ReactCalendarTimeline extends Component {
     )
   }
 
-  infoLabel() {
-    let label = null
+  // infoLabel() {
+  //   let label = null
 
-    if (this.state.dragTime) {
-      label = `${moment(this.state.dragTime).format('LLL')}, 
-        ${this.state.dragGroupTitle}`
-    } else if (this.state.resizeTime) {
-      label = moment(this.state.resizeTime).format('LLL')
-    }
+  //   if (this.state.dragTime) {
+  //     label = `${moment(this.state.dragTime).format('LLL')},
+  //       ${this.state.dragGroupTitle}`
+  //   } else if (this.state.resizeTime) {
+  //     label = moment(this.state.resizeTime).format('LLL')
+  //   }
 
-    return label ? <InfoLabel label={label} /> : undefined
-  }
+  //   return label ? <InfoLabel label={label} /> : undefined
+  // }
 
   handleHeaderRef = el => {
     this.scrollHeaderRef = el
@@ -1063,7 +1062,6 @@ export default class ReactCalendarTimeline extends Component {
                       height
                     )}
                     {this.rows(canvasWidth, groupHeights, groups)}
-                    {this.infoLabel()}
                     {this.childrenWithProps(
                       canvasTimeStart,
                       canvasTimeEnd,
