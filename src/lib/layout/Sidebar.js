@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import classNames from 'classnames'
 
 import { _get, arraysEqual } from '../utility/generic'
 
@@ -8,6 +9,7 @@ export default class Sidebar extends Component {
     groups: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
+    horizontalLineClassNamesForGroup: PropTypes.func.isRequired,
     groupHeights: PropTypes.array.isRequired,
     keys: PropTypes.object.isRequired,
     groupRenderer: PropTypes.func,
@@ -36,7 +38,7 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    const { width, groupHeights, height, isRightSidebar } = this.props
+    const { width, groupHeights, height, horizontalLineClassNamesForGroup, isRightSidebar } = this.props
 
     const { groupIdKey, groupTitleKey, groupRightTitleKey } = this.props.keys
 
@@ -59,7 +61,7 @@ export default class Sidebar extends Component {
         <div
           key={_get(group, groupIdKey)}
           className={
-            'rct-sidebar-row rct-sidebar-row-' + (index % 2 === 0 ? 'even' : 'odd')
+            classNames('rct-sidebar-row', 'rct-sidebar-row-', (index % 2 === 0 ? 'even' : 'odd'), ...horizontalLineClassNamesForGroup(group))
           }
           style={elementStyle}
         >

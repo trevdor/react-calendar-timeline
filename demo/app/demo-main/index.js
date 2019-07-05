@@ -151,6 +151,9 @@ export default class App extends Component {
     return (
       <Timeline
         groups={groups}
+        horizontalLineClassNamesForGroup={group =>
+          group.title.includes("e") ? ["highlight"] : ""
+        }
         items={items}
         keys={keys}
         sidebarWidth={150}

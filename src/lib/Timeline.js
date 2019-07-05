@@ -184,7 +184,7 @@ export default class ReactCalendarTimeline extends Component {
 
     traditionalZoom: false,
 
-    horizontalLineClassNamesForGroup: null,
+    horizontalLineClassNamesForGroup: () => [],
 
     onItemMove: null,
     onItemResize: null,
@@ -827,13 +827,15 @@ export default class ReactCalendarTimeline extends Component {
     return (
       sidebarWidth && 
       <Sidebar
-        groups={this.props.groups}
+        groupHeights={groupHeights}
         groupRenderer={this.props.groupRenderer}
+        groups={this.props.groups}
+        height={height}
+        horizontalLineClassNamesForGroup={
+          this.props.horizontalLineClassNamesForGroup
+        }
         keys={this.props.keys}
         width={sidebarWidth}
-        groupHeights={groupHeights}
-        height={height}
-
       />
     )
   }
@@ -843,14 +845,16 @@ export default class ReactCalendarTimeline extends Component {
     return (
       rightSidebarWidth &&
       <Sidebar
-        groups={this.props.groups}
-        keys={this.props.keys}
-        groupRenderer={this.props.groupRenderer}
-        isRightSidebar
-        width={rightSidebarWidth}
         groupHeights={groupHeights}
+        groupRenderer={this.props.groupRenderer}
+        groups={this.props.groups}
+        horizontalLineClassNamesForGroup={
+          this.props.horizontalLineClassNamesForGroup
+        }
         height={height}
-
+        isRightSidebar
+        keys={this.props.keys}
+        width={rightSidebarWidth}
       />
     )
   }
