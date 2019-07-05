@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup, within, fireEvent } from 'react-testing-library'
+import { render, cleanup, within, fireEvent } from '@testing-library/react'
 import Timeline from 'lib/Timeline'
 import DateHeader from 'lib/headers/DateHeader'
 import SidebarHeader from 'lib/headers/SidebarHeader'
@@ -88,11 +88,11 @@ describe('Testing DateHeader Component', () => {
   it('Given Dateheader When click on the primary header Then it should change the unit', async () => {
     const formatlabel = jest.fn(interval => interval[0].format('MM/DD/YYYY'))
     const showPeriod = jest.fn()
-    const { getByTestId } = render(
+    const { getAllByTestId } = render(
       dateHeaderComponent({ unit: 'day', labelFormat: formatlabel, showPeriod })
     )
     // Arrange
-    const primaryHeader = getByTestId('dateHeader')
+    const primaryHeader = getAllByTestId('dateHeader')[0]
 
     // Act
     const primaryFirstClick = within(primaryHeader).getByText('2018')
@@ -309,7 +309,7 @@ describe('Testing DateHeader Component', () => {
       expect(onClick).toHaveBeenCalled()
     })
     it('Given DateHeader When passing interval renderer Then it should be rendered', () => {
-      const { getByTestId } = render(
+      const { queryAllByTestId } = render(
         <RenderHeadersWrapper>
           <TimelineHeaders>
             <DateHeader
@@ -324,7 +324,7 @@ describe('Testing DateHeader Component', () => {
           </TimelineHeaders>
         </RenderHeadersWrapper>
       )
-      expect(getByTestId('interval')).toBeInTheDocument()
+      expect(queryAllByTestId('interval')).toBeTruthy()
     })
     it("Given DateHeader When passing interval renderer Then it should called with interval's context", () => {
       const renderer = jest.fn(({ getIntervalProps, intervalContext }) => {
@@ -362,7 +362,7 @@ describe('Testing DateHeader Component', () => {
         </div>
       )
     }
-    const { getByTestId } = render(
+    const { queryAllByTestId } = render(
       <RenderHeadersWrapper>
         <TimelineHeaders>
           <SidebarHeader>
@@ -381,7 +381,7 @@ describe('Testing DateHeader Component', () => {
       </RenderHeadersWrapper>
     )
 
-    expect(getByTestId('interval-a')).toBeInTheDocument()
+    expect(queryAllByTestId('interval-a')).toBeTruthy()
   })
   it('Given DateHeader When passing a react component to interval renderer Then it should render', () => {
     class Renderer extends React.Component {
@@ -394,7 +394,7 @@ describe('Testing DateHeader Component', () => {
         )
       }
     }
-    const { getByTestId } = render(
+    const { queryAllByTestId } = render(
       <RenderHeadersWrapper>
         <TimelineHeaders>
           <SidebarHeader>
@@ -413,7 +413,7 @@ describe('Testing DateHeader Component', () => {
       </RenderHeadersWrapper>
     )
 
-    expect(getByTestId('interval-a')).toBeInTheDocument()
+    expect(queryAllByTestId('interval-a')).toBeTruthy()
   })
   it('#562 Given DateHeader when passing week as a unit then header should render without error', ()=>{
     render(
